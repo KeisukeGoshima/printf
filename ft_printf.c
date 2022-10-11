@@ -161,7 +161,6 @@ int	ft_printf(const char *argv, ...)
 {
     va_list	ap;
     char	*str;
-	size_t	count;
 	int		flag[6]; // -, +, num, ' ', 0, count 
 
     str = ft_strdup(argv);

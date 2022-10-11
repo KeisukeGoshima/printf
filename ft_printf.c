@@ -24,8 +24,8 @@ void	flag_init(int *flag)
 void	ft_putoutput(char *output, int *flag)
 {
 	if (flag[1] == ' ' || flag[1] == '+')
-		ft_putchar_fd(flag[1], 1);
-	ft_putstr_fd(output, 1);
+		ft_putchar_fd(flag[1], 1, flag);
+	ft_putstr_fd(output, 1, flag);
 }
 
 void	ft_putstr_flag(char *output, int *flag, int option) // -, +, num, ' ', 0 
@@ -44,9 +44,9 @@ void	ft_putstr_flag(char *output, int *flag, int option) // -, +, num, ' ', 0
 	while (len++ < flag[2])
 	{
 		if (flag[4])
-			ft_putchar_fd('0', 1);
+			ft_putchar_fd('0', 1, flag);
 		else
-			ft_putchar_fd(' ', 1);
+			ft_putchar_fd(' ', 1, flag);
 	}
 	if (!flag[0])
 		ft_putoutput(output, flag);
@@ -119,7 +119,7 @@ void	convert_address(void *p, int *flag)
 void	format_distribute(char *str, va_list ap, int *flag)
 {
 	if (*str == 'c')
-		ft_putchar_fd(va_arg(ap, int), 1);
+		ft_putchar_fd(va_arg(ap, int), 1, flag);
 	else if (*str == 's')
 		ft_putstr_flag(va_arg(ap, char*), flag, 0);
 	else if (*str == 'p')
@@ -133,7 +133,7 @@ void	format_distribute(char *str, va_list ap, int *flag)
 	else if (*str == 'X')
 		convert_base(va_arg(ap, int), 1, flag, 16);
 	else if (*str == '%')
-		ft_putchar_fd('%', 1);
+		ft_putchar_fd('%', 1, flag);
 	else
 		flag_distribute(str, ap, flag);
 }
@@ -151,7 +151,7 @@ void	ft_check_percent(char *str, va_list ap, int *flag)
 		}
 		else
 		{
-			ft_putchar_fd(*str, 1);
+			ft_putchar_fd(*str, 1, flag);
 			str++;
 		}
 	}
@@ -161,7 +161,8 @@ int	ft_printf(const char *argv, ...)
 {
     va_list	ap;
     char	*str;
-	int		flag[5]; // -, +, num, ' ', 0 
+	size_t	count;
+	int		flag[6]; // -, +, num, ' ', 0, count 
 
     str = ft_strdup(argv);
 	flag_init(flag);
@@ -170,6 +171,8 @@ int	ft_printf(const char *argv, ...)
     va_start(ap, argv);
     ft_check_percent(str, ap, flag);
     va_end(ap);
+	free(str);
+	return (flag[5]);
 }
 
 #include <stdio.h>

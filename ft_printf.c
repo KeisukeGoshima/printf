@@ -175,9 +175,34 @@ int	ft_printf(const char *argv, ...)
 }
 
 #include <stdio.h>
-int	main(void)
+int main(void)
 {
-    char *str = "42tokyo";
+	int i;
+	char *a = "a";
 
-    ft_printf("%s", str);
+	ft_printf("%d\n", 10);
+	printf("%d", 10);
+	printf("----------");
+	ft_printf("%i\n", 10);
+	printf("%i", 10);
+	printf("----------");
+	ft_printf("%c\n", 'a');
+	printf("%c", 'a');
+	printf("----------");
+	ft_printf("%p\n", a);
+	printf("%p", a);
+	printf("----------");
+	ft_printf("%s\n", "42tokyo");
+	printf("%s", "42tokyo");
+	printf("----------");
+	ft_printf("%u\n", 10);
+	printf("%u", 10);
+	printf("----------");
+	ft_printf("%x\n", 10);
+	printf("%x", 10);
+	printf("----------");
+	ft_printf("%X\n", 10);
+	printf("%X", 10);
+	printf("----------");
+	return (0);
 }

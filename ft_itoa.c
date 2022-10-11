@@ -81,36 +81,3 @@ char	*ft_itoa_base(int n, int base)
 	str[count + sign] = '\0';
 	return (str);
 }
-
-#include <stdio.h>
-int main(void)
-{
-	int i;
-	char *a = "a";
-
-	ft_printf("%d\n", 10);
-	printf("%d", 10);
-	printf("----------");
-	ft_printf("%i\n", 10);
-	printf("%i", 10);
-	printf("----------");
-	ft_printf("%c\n", 'a');
-	printf("%c", 'a');
-	printf("----------");
-	ft_printf("%p\n", a);
-	printf("%p", a);
-	printf("----------");
-	ft_printf("%s\n", "42tokyo");
-	printf("%s", "42tokyo");
-	printf("----------");
-	ft_printf("%u\n", 10);
-	printf("%u", 10);
-	printf("----------");
-	ft_printf("%x\n", 10);
-	printf("%x", 10);
-	printf("----------");
-	ft_printf("%X\n", 10);
-	printf("%X", 10);
-	printf("----------");
-	return (0);
-}

@@ -1,26 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   ft_put_fd.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/10 20:33:35 by marvin            #+#    #+#             */
-/*   Updated: 2022/10/10 20:33:35 by marvin           ###   ########.fr       */
+/*   Created: 2022/10/11 22:37:50 by marvin            #+#    #+#             */
+/*   Updated: 2022/10/11 22:37:50 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_h
-# include <stdarg.h>
-# include <stdlib.h>
+#include "ft_printf.h"
+#include <unistd.h>
 
-int 	ft_printf(const char *argv, ...);
-char	*ft_itoa_base(int n, int base);
-char	convert_0x(int num);
-char	*ft_strdup(const char *s);
-size_t	ft_strlen(const char *s);
-void	ft_putstr_fd(char *s, int fd);
-void	ft_putchar_fd(char c, int fd);
+void	ft_putchar_fd(char c, int fd)
+{
+	if (fd < 0)
+		return ;
+	write(fd, &c, sizeof(char));
+}
 
-#endif
+void	ft_putstr_fd(char *s, int fd)
+{
+	if (s == NULL || fd < 0)
+		return ;
+	write(fd, s, ft_strlen(s));
+}

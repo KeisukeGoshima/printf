@@ -1,16 +1,11 @@
 CC			= gcc
-CFLAGS		= -Wall -Wextra -Werror
+CFLAGS		= -Wall -Wextra -Werror -I.
 SRCSDIR		= ./srcs
-SRCS		= ft_print.c
-BSRUS		= 
+SRCS		= ft_print.c ft_itoa.c ft_put_fd.c ft_strdup.c
 OBJS		= $(notdir $(SRCS:.c=.o))
 BOBJS		= $(notdir $(BSRUS:.c=.o))
 INCLUDEDIR	= ./includes
 NAME		= libftprintf.a
-
-ifdef WITH_BONUS
-	SRCS += $(BSRUS)
-endif
 
 all:			$(NAME)
 
@@ -25,6 +20,3 @@ re:				fclean all
 
 $(NAME):		$(OBJS)
 				ar rc $(NAME) $(OBJS)
-
-bonus:			
-				make WITH_BONUS=1

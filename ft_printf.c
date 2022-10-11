@@ -165,6 +165,7 @@ int	ft_printf(const char *argv, ...)
 
     str = ft_strdup(argv);
 	flag_init(flag);
+	flag[5] = 0;
     if (str == NULL)
         return (0);
     va_start(ap, argv);

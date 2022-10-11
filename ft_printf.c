@@ -177,7 +177,6 @@ int	ft_printf(const char *argv, ...)
 #include <stdio.h>
 int main(void)
 {
-	int i;
 	char *a = "a";
 
 	ft_printf("%d\n", 10);
@@ -192,8 +191,8 @@ int main(void)
 	ft_printf("%p\n", a);
 	printf("%p", a);
 	printf("----------");
-	ft_printf("%s\n", "42tokyo");
-	printf("%s", "42tokyo");
+	ft_printf("%d\n", ft_printf("%s\n", "42tokyo"));
+	printf("%d\n", printf("%s", "42tokyo"));
 	printf("----------");
 	ft_printf("%u\n", 10);
 	printf("%u", 10);

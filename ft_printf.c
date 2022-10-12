@@ -26,8 +26,10 @@ void	ft_putoutput(char *output, int *flag)
 {
 	if (flag[1] == ' ' || flag[1] == '+')
 		ft_putchar_fd(flag[1], 1, flag);
-	if (flag[5] == 16)
+	if (flag[5] == 16 && output[0] != '0')
 		ft_putstr_fd("0x", 1, flag);
+	if (flag[5] == 17 && output[0] != '0')
+		ft_putstr_fd("0X", 1, flag);
 	ft_putstr_fd(output, 1, flag);
 }
 
@@ -45,7 +47,7 @@ void	ft_putstr_main(char *output, int *flag, int len)
 			ft_putchar_fd(' ', 1, flag);
 	}
 	if (flag[4] && !flag[0] && output[0] == '-')
-		ft_putstr_fd(&output[1], flag);
+		ft_putoutput(&output[1], flag);
 	else if (!flag[0])
 		ft_putoutput(output, flag);
 }
@@ -110,6 +112,8 @@ void	convert_base(int num, int option, int *flag, int base)
 			i++;
 		}
 	}
+	if (flag[5] == 1 && base == 16)
+		flag[5] = 16 + option;
 	ft_putstr_flag(output, flag, option);
 	free(output);
 }
@@ -121,8 +125,6 @@ void	convert_standard_num(int num, int option, int *flag, int base)
 	output = ft_itoa_base(num, base);
 	if (output == NULL)
 		return ;
-	if (flag[5] == 1 && base == 16)
-		flag[5] = 16;
 	ft_putstr_flag(output, flag, option);
 	free(output);
 }
@@ -222,6 +224,7 @@ int	ft_printf(const char *argv, ...)
 	return (flag[6]);
 }
 
+/*
 #include <stdio.h>
 int main(void)
 {
@@ -252,4 +255,4 @@ int main(void)
 	printf("%X\n", 10);
 	printf("----------\n");
 	return (0);
-}
+}*/

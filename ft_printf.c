@@ -14,7 +14,7 @@
 
 void	flag_init(int *flag)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (i < 6)
@@ -49,7 +49,7 @@ char	*format_distribute(char *str, va_list ap, int *flag)
 	if (*str == 'c')
 		ft_putchar_flag(va_arg(ap, int), flag);
 	else if (*str == 's')
-		ft_putstr_flag(va_arg(ap, char*), flag, 0);
+		ft_putstr_flag(va_arg(ap, char *), flag, 0);
 	else if (*str == 'p')
 		convert_address(va_arg(ap, unsigned long long), flag);
 	else if (*str == 'd' || *str == 'i')
@@ -90,13 +90,13 @@ int	ft_printf(const char *argv, ...)
 {
     va_list	ap;
     char	*str;
-	int		flag[7]; // -, +, num, ' ', 0, #, count 
+	int		flag[7];
 
     str = ft_strdup(argv);
 	flag_init(flag);
 	flag[6] = 0;
     if (str == NULL)
-        return (0);
+    	return (0);
     va_start(ap, argv);
     ft_check_percent(str, ap, flag);
     va_end(ap);

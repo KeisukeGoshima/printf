@@ -17,7 +17,7 @@
 # include <limits.h>
 # include <unistd.h>
 
-int 	ft_printf(const char *argv, ...);
+int		ft_printf(const char *argv, ...);
 char	*format_distribute(char *str, va_list ap, int *flag);
 void	ft_putchar_flag(int c, int *flag);
 void	ft_putstr_flag(char *output, int *flag, int option);

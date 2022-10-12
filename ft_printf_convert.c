@@ -14,7 +14,7 @@
 
 void	convert_base(int num, int option, int *flag, int base)
 {
-	char 			*output;
+	char			*output;
 	int				digit;
 	unsigned int	n;
 	int				i;
@@ -41,7 +41,7 @@ void	convert_base(int num, int option, int *flag, int base)
 
 void	convert_standard_num(int num, int option, int *flag, int base)
 {
-	char 			*output;
+	char	*output;
 
 	output = ft_itoa_base(num, base);
 	if (output == NULL)
@@ -52,7 +52,7 @@ void	convert_standard_num(int num, int option, int *flag, int base)
 
 void	convert_address(unsigned long long p, int *flag)
 {
-	char 				*str;
+	char	*str;
 
 	str = convert_numtostr(p, 16);
 	if (str == NULL)

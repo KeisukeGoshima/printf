@@ -55,12 +55,12 @@ void	ft_putstr_flag(char *output, int *flag, int option)
 	}
 	len = ft_strlen(output);
 	if (output[0] != '-' && flag[1] == 1 && option == 2)
-		flag[1] = '+'; // +
+		flag[1] = '+';
 	else if (output[0] != '-' && flag[3] == 1 && option == 2)
-		flag[1] = ' '; // ' '
+		flag[1] = ' ';
 	if (flag[1] == '+' || flag[1] == ' ')
 		len++;
-	if (flag[5] == 16)
+	if (15 <= flag[5] && flag[5] <= 17)
 		len += 2;
 	ft_putstr_main(output, flag, len);
 }

@@ -16,6 +16,7 @@
 # include <stdlib.h>
 
 int 	ft_printf(const char *argv, ...);
+char	*convert_numtostr(unsigned long long n, int base);
 char	*ft_itoa_base(int n, int base);
 char	convert_0x(int num);
 char	*ft_strdup(const char *s);

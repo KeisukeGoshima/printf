@@ -54,11 +54,16 @@ void	ft_putstr_flag(char *output, int *flag, int option) // -, +, num, ' ', 0
 
 void	convert_base(int num, int option, int *flag, int base)
 {
-	char 	*output;
-	int		digit;
-	int		i;
+	char 			*output;
+	int				digit;
+	unsigned int	n;
+	int				i;
 
-	output = ft_itoa_base(num, base);
+	if (num < 0)
+		n = UINT_MAX + num - 1;
+	else
+		n = num;
+	output = convert_numtostr(num, base);
 	if (output == NULL)
 		return ;
 	digit = ft_strlen(output);
@@ -71,6 +76,21 @@ void	convert_base(int num, int option, int *flag, int base)
 			i++;
 		}
 	}
+	ft_putstr_flag(output, flag, option);
+	free(output);
+}
+
+void	convert_standard_num(int num, int option, int *flag, int base)
+{
+	char 			*output;
+	int				digit;
+	int				i;
+
+	output = ft_itoa_base(num, base);
+	if (output == NULL)
+		return ;
+	digit = ft_strlen(output);
+	i = 0;
 	ft_putstr_flag(output, flag, option);
 	free(output);
 }
@@ -128,7 +148,7 @@ void	format_distribute(char *str, va_list ap, int *flag)
 	else if (*str == 'p')
 		convert_address(va_arg(ap, void*), flag);
 	else if (*str == 'd' || *str == 'i')
-		convert_base(va_arg(ap, int), 2, flag, 10);
+		convert_standard_num(va_arg(ap, int), 2, flag, 10);
 	else if (*str == 'u')
 		convert_base(va_arg(ap, unsigned int), 0, flag, 10);
 	else if (*str == 'x')

@@ -1,7 +1,7 @@
 CC			= gcc
 CFLAGS		= -Wall -Wextra -Werror -I.
 SRCSDIR		= ./srcs
-SRCS		= ft_printf.c ft_itoa.c ft_put_fd.c ft_strdup.c
+SRCS		= ft_printf.c ft_itoa.c ft_put_fd.c ft_strdup.c ft_convert_base.c
 OBJS		= $(notdir $(SRCS:.c=.o))
 BOBJS		= $(notdir $(BSRUS:.c=.o))
 INCLUDEDIR	= ./includes

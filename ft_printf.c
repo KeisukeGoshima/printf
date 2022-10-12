@@ -47,9 +47,9 @@ void	ft_putstr_flag(char *output, int *flag, int option) // -, +, num, ' ', 0
 		len++;
 	if (flag[0])
 		ft_putoutput(output, flag);
-	while (len++ < flag[2] && (!flag[0] || (flag[0] && !flag[4])))
+	while (len++ < flag[2])
 	{
-		if (flag[4])
+		if (flag[4] && !flag[1])
 			ft_putchar_fd('0', 1, flag);
 		else
 			ft_putchar_fd(' ', 1, flag);
@@ -113,7 +113,7 @@ void	convert_chartostr(int c, int *flag, int option)
 	str = malloc(sizeof(char) * 2);
 	str[0] = c;
 	str[1] = 0;
-	ft_putstr_flag(str, flag, 0);
+	ft_putstr_flag(str, flag, option);
 	free(str);
 }
 
@@ -209,8 +209,8 @@ int main(void)
 	ft_printf("%5i\n", 10);
 	printf("%5i\n", 10);
 	printf("----------\n");
-	ft_printf("%-3c\n", 'a');
-	printf("%-3c\n", 'a');
+	printf("%d\n", ft_printf("%-3c\n", 0));
+	printf("%d\n", printf("%-3c\n", 0));
 	printf("----------\n");
 	ft_printf("%-20p\n", LONG_MIN);
 	//printf("%-20p\n", LONG_MIN);

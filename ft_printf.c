@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+#include <limits.h>
 
 void	flag_init(int *flag)
 {
@@ -32,6 +33,11 @@ void	ft_putstr_flag(char *output, int *flag, int option) // -, +, num, ' ', 0
 {
 	int	len;
 
+	if (output == NULL)
+	{
+		ft_putstr_fd("0x0", 1, flag);
+		return ;
+	}
 	len = ft_strlen(output);
 	if (output[0] != '-' && flag[1] == 1 && option == 2)
 		flag[1] = '+'; // +
@@ -60,10 +66,10 @@ void	convert_base(int num, int option, int *flag, int base)
 	int				i;
 
 	if (num < 0)
-		n = UINT_MAX + num - 1;
+		n = UINT_MAX + num + 1;
 	else
 		n = num;
-	output = convert_numtostr(num, base);
+	output = convert_numtostr(n, base);
 	if (output == NULL)
 		return ;
 	digit = ft_strlen(output);
@@ -115,6 +121,8 @@ void	convert_address(void *p, int *flag)
 		num -= (num % div);
 		div *= 16;
 	}
+	if (i == 17)
+		str[i--] = '0';
 	str[i--] = 'x';
 	str[i] = '0';
 	ft_putstr_flag(&str[i], flag, 0);

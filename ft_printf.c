@@ -47,7 +47,7 @@ void	ft_putstr_flag(char *output, int *flag, int option) // -, +, num, ' ', 0
 		len++;
 	if (flag[0])
 		ft_putoutput(output, flag);
-	while (len++ < flag[2] && !flag[0])
+	while (len++ < flag[2] && (!flag[0] || (flag[0] && !flag[4])))
 	{
 		if (flag[4])
 			ft_putchar_fd('0', 1, flag);
@@ -86,14 +86,10 @@ void	convert_base(int num, int option, int *flag, int base)
 void	convert_standard_num(int num, int option, int *flag, int base)
 {
 	char 			*output;
-	int				digit;
-	int				i;
 
 	output = ft_itoa_base(num, base);
 	if (output == NULL)
 		return ;
-	digit = ft_strlen(output);
-	i = 0;
 	ft_putstr_flag(output, flag, option);
 	free(output);
 }
@@ -106,6 +102,17 @@ void	convert_address(unsigned long long p, int *flag)
 	if (str == NULL)
 		return ;
 	ft_putstr_fd("0x", 1, flag);
+	ft_putstr_flag(str, flag, 0);
+	free(str);
+}
+
+void	convert_chartostr(int c, int *flag, int option)
+{
+	char	*str;
+
+	str = malloc(sizeof(char) * 2);
+	str[0] = c;
+	str[1] = 0;
 	ft_putstr_flag(str, flag, 0);
 	free(str);
 }
@@ -134,7 +141,7 @@ char	*flag_distribute(char *str, va_list ap, int *flag)
 char	*format_distribute(char *str, va_list ap, int *flag)
 {
 	if (*str == 'c')
-		ft_putchar_fd(va_arg(ap, int), 1, flag);
+		convert_chartostr(va_arg(ap, int), flag, 0);
 	else if (*str == 's')
 		ft_putstr_flag(va_arg(ap, char*), flag, 0);
 	else if (*str == 'p')

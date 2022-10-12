@@ -25,9 +25,9 @@ int	countdigit_base_unsigned(unsigned long long n, int base)
 	return (digit);
 }
 
-void	setnum_unsigned(long n, int base, char *str, int digit)
+void	setnum_unsigned(unsigned long long n, int base, char *str, int digit)
 {
-	int					i;
+	int	i;
 
 	i = digit - 1;
 	while (i >= 0)

@@ -75,6 +75,32 @@ void	convert_base(int num, int option, int *flag, int base)
 	free(output);
 }
 
+void	convert_address(void *p, int *flag)
+{
+	unsigned long long	num;
+	char 				*str;
+	int					i;
+	unsigned long long	div;
+
+	num = (unsigned long long)p;
+	str = malloc(sizeof(char) * 19);
+	if (str == NULL)
+		return ;
+	str[18] = '\0';
+	i = 17;
+	div = 16;
+	while (num != 0)
+	{
+		str[i--] = convert_0x(((num % div) / (div / 16)));
+		num -= (num % div);
+		div *= 16;
+	}
+	str[i--] = 'x';
+	str[i] = '0';
+	ft_putstr_flag(&str[i], flag, 0);
+	free(str);
+}
+
 void	flag_distribute(char *str, va_list ap, int *flag)
 {
 	if (*str == '-')
@@ -91,29 +117,6 @@ void	flag_distribute(char *str, va_list ap, int *flag)
 		return ;
 	str++;
 	format_distribute(str, ap, flag);
-}
-
-void	convert_address(void *p, int *flag)
-{
-	unsigned long long	num;
-	char 				*str;
-	int					i;
-	unsigned long long	div;
-
-	num = (unsigned long long)p;
-	str = malloc(sizeof(char) * 17);
-	i = 16;
-	div = 16;
-	while (num != 0)
-	{
-		str[i--] = convert_0x(((num % div) / (div / 16)));
-		num -= (num % div);
-		div *= 16;
-	}
-	while (i >= 0)
-		str[i--] = '0';
-	ft_putstr_flag(str, flag, 0);
-	free(str);
 }
 
 void	format_distribute(char *str, va_list ap, int *flag)
@@ -179,6 +182,7 @@ int	ft_printf(const char *argv, ...)
 int main(void)
 {
 	char *a = "a";
+	unsigned int i = 10;
 
 	ft_printf("%d\n", 10);
 	printf("%d\n", 10);
@@ -194,9 +198,9 @@ int main(void)
 	printf("----------\n");
 	ft_printf("%d\n", ft_printf("%s\n", "42tokyo"));
 	printf("%d\n", printf("%s\n", "42tokyo"));
-	printf("----------");
-	ft_printf("%u\n", 10);
-	printf("%u\n", 10);
+	printf("----------\n");
+	ft_printf("%u\n", i);
+	printf("%u\n", i);
 	printf("----------\n");
 	ft_printf("%x\n", 10);
 	printf("%x\n", 10);

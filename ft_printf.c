@@ -110,7 +110,7 @@ void	convert_address(unsigned long long p, int *flag)
 	free(str);
 }
 
-void	flag_distribute(char *str, va_list ap, int *flag)
+char	*flag_distribute(char *str, va_list ap, int *flag)
 {
 	if (*str == '-')
 		flag[0] = 1;
@@ -123,12 +123,15 @@ void	flag_distribute(char *str, va_list ap, int *flag)
 	else if (*str == '0')
 		flag[4] = 1;
 	else
-		return ;
+	{
+		str--;
+		return (str);
+	}
 	str++;
-	format_distribute(str, ap, flag);
+	return (format_distribute(str, ap, flag));
 }
 
-void	format_distribute(char *str, va_list ap, int *flag)
+char	*format_distribute(char *str, va_list ap, int *flag)
 {
 	if (*str == 'c')
 		ft_putchar_fd(va_arg(ap, int), 1, flag);
@@ -147,7 +150,8 @@ void	format_distribute(char *str, va_list ap, int *flag)
 	else if (*str == '%')
 		ft_putchar_fd('%', 1, flag);
 	else
-		flag_distribute(str, ap, flag);
+		str = flag_distribute(str, ap, flag);
+	return (str);
 }
 
 void	ft_check_percent(char *str, va_list ap, int *flag)
@@ -157,7 +161,7 @@ void	ft_check_percent(char *str, va_list ap, int *flag)
 		if (*str == '%')
 		{
 			str++;
-			format_distribute(str, ap, flag);
+			str = format_distribute(str, ap, flag);
 			flag_init(flag);
 			str++;
 		}
@@ -202,7 +206,7 @@ int main(void)
 	printf("%-3c\n", 'a');
 	printf("----------\n");
 	ft_printf("%-20p\n", LONG_MIN);
-	printf("%-20p\n", LONG_MIN);
+	//printf("%-20p\n", LONG_MIN);
 	printf("----------\n");
 	ft_printf("%3d\n", ft_printf("%s\n", "42tokyo"));
 	printf("%3d\n", printf("%s\n", "42tokyo"));

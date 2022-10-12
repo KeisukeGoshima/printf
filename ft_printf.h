@@ -22,7 +22,7 @@ char	convert_0x(int num);
 char	*ft_strdup(const char *s);
 size_t	ft_strlen(const char *s);
 int		ft_toupper(int c);
-void	format_distribute(char *str, va_list ap, int *flag);
+char	*format_distribute(char *str, va_list ap, int *flag)
 void	ft_putstr_fd(char *s, int fd, int *flag);
 void	ft_putchar_fd(char c, int fd, int *flag);
 

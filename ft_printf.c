@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include <limits.h>
 
 void	flag_init(int *flag)
 {
@@ -20,125 +19,6 @@ void	flag_init(int *flag)
 	i = 0;
 	while (i < 6)
 		flag[i++] = 0;
-}
-
-void	ft_putoutput(char *output, int *flag)
-{
-	if (flag[1] == ' ' || flag[1] == '+')
-		ft_putchar_fd(flag[1], 1, flag);
-	if (flag[5] == 16 && output[0] != '0')
-		ft_putstr_fd("0x", 1, flag);
-	if (flag[5] == 17 && output[0] != '0')
-		ft_putstr_fd("0X", 1, flag);
-	ft_putstr_fd(output, 1, flag);
-}
-
-void	ft_putstr_main(char *output, int *flag, int len)
-{
-	if (flag[0])
-		ft_putoutput(output, flag);
-	if (flag[4] && !flag[0] && output[0] == '-')
-		ft_putchar_fd('-', 1, flag);
-	while (len++ < flag[2])
-	{
-		if (flag[4] && !flag[0])
-			ft_putchar_fd('0', 1, flag);
-		else
-			ft_putchar_fd(' ', 1, flag);
-	}
-	if (flag[4] && !flag[0] && output[0] == '-')
-		ft_putoutput(&output[1], flag);
-	else if (!flag[0])
-		ft_putoutput(output, flag);
-}
-
-void	ft_putstr_flag(char *output, int *flag, int option) // -, +, num, ' ', 0 
-{
-	int	len;
-
-	if (output == NULL)
-	{
-		ft_putstr_fd("(null)", 1, flag);
-		return ;
-	}
-	len = ft_strlen(output);
-	if (output[0] != '-' && flag[1] == 1 && option == 2)
-		flag[1] = '+'; // +
-	else if (output[0] != '-' && flag[3] == 1 && option == 2)
-		flag[1] = ' '; // ' '
-	if (flag[1] == '+' || flag[1] == ' ')
-		len++;
-	if (flag[5] == 16)
-		len += 2;
-	ft_putstr_main(output, flag, len);
-}
-
-void	ft_putchar_flag(int c, int *flag)
-{
-	int	len;
-
-	len = 1;
-	if (flag[0])
-		ft_putchar_fd(c, 1, flag);
-	while (len++ < flag[2])
-	{
-		if (flag[4] && !flag[0])
-			ft_putchar_fd('0', 1, flag);
-		else
-			ft_putchar_fd(' ', 1, flag);
-	}
-	if (!flag[0])
-		ft_putchar_fd(c, 1, flag);
-}
-
-void	convert_base(int num, int option, int *flag, int base)
-{
-	char 			*output;
-	int				digit;
-	unsigned int	n;
-	int				i;
-
-	n = (unsigned int)num;
-	output = convert_numtostr(n, base);
-	if (output == NULL)
-		return ;
-	digit = ft_strlen(output);
-	i = 0;
-	if (option == 1)
-	{
-		while (i < digit)
-		{
-			output[i] = ft_toupper(output[i]);
-			i++;
-		}
-	}
-	if (flag[5] == 1 && base == 16)
-		flag[5] = 16 + option;
-	ft_putstr_flag(output, flag, option);
-	free(output);
-}
-
-void	convert_standard_num(int num, int option, int *flag, int base)
-{
-	char 			*output;
-
-	output = ft_itoa_base(num, base);
-	if (output == NULL)
-		return ;
-	ft_putstr_flag(output, flag, option);
-	free(output);
-}
-
-void	convert_address(unsigned long long p, int *flag)
-{
-	char 				*str;
-
-	str = convert_numtostr(p, 16);
-	if (str == NULL)
-		return ;
-	flag[5] = 16;
-	ft_putstr_flag(str, flag, 0);
-	free(str);
 }
 
 char	*flag_distribute(char *str, va_list ap, int *flag)
@@ -229,7 +109,6 @@ int	ft_printf(const char *argv, ...)
 int main(void)
 {
 	unsigned int i = 10;
-
 	ft_printf("%-3d\n", 10);
 	printf("%-3d\n", 10);
 	printf("----------\n");

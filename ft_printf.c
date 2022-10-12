@@ -31,6 +31,25 @@ void	ft_putoutput(char *output, int *flag)
 	ft_putstr_fd(output, 1, flag);
 }
 
+void	ft_putstr_main(char *output, int *flag, int len)
+{
+	if (flag[0])
+		ft_putoutput(output, flag);
+	if (flag[4] && !flag[0] && output[0] == '-')
+		ft_putchar_fd('-', 1, flag);
+	while (len++ < flag[2])
+	{
+		if (flag[4] && !flag[0])
+			ft_putchar_fd('0', 1, flag);
+		else
+			ft_putchar_fd(' ', 1, flag);
+	}
+	if (flag[4] && !flag[0] && output[0] == '-')
+		ft_putstr_fd(&output[1], flag);
+	else if (!flag[0])
+		ft_putoutput(output, flag);
+}
+
 void	ft_putstr_flag(char *output, int *flag, int option) // -, +, num, ' ', 0 
 {
 	int	len;
@@ -47,27 +66,16 @@ void	ft_putstr_flag(char *output, int *flag, int option) // -, +, num, ' ', 0
 		flag[1] = ' '; // ' '
 	if (flag[1] == '+' || flag[1] == ' ')
 		len++;
-	if (flag[0])
-		ft_putoutput(output, flag);
-	while (len++ < flag[2])
-	{
-		if (flag[4] && !flag[0])
-			ft_putchar_fd('0', 1, flag);
-		else
-			ft_putchar_fd(' ', 1, flag);
-	}
-	if (!flag[0])
-		ft_putoutput(output, flag);
+	if (flag[5] == 16)
+		len += 2;
+	ft_putstr_main(output, flag, len);
 }
 
-void	ft_putchar_flag(int c, int *flag, int option)
+void	ft_putchar_flag(int c, int *flag)
 {
 	int	len;
 
-	if (c == 0)
-		len = 0;
-	else
-		len = 1;
+	len = 1;
 	if (flag[0])
 		ft_putchar_fd(c, 1, flag);
 	while (len++ < flag[2])
@@ -157,7 +165,7 @@ char	*flag_distribute(char *str, va_list ap, int *flag)
 char	*format_distribute(char *str, va_list ap, int *flag)
 {
 	if (*str == 'c')
-		ft_putchar_flag(va_arg(ap, int), flag, 0);
+		ft_putchar_flag(va_arg(ap, int), flag);
 	else if (*str == 's')
 		ft_putstr_flag(va_arg(ap, char*), flag, 0);
 	else if (*str == 'p')

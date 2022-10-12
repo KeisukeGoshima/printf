@@ -35,7 +35,7 @@ void	ft_putstr_flag(char *output, int *flag, int option) // -, +, num, ' ', 0
 
 	if (output == NULL)
 	{
-		ft_putstr_fd("0x0", 1, flag);
+		ft_putstr_fd("(null)", 1, flag);
 		return ;
 	}
 	len = ft_strlen(output);

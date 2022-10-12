@@ -88,18 +88,18 @@ void	ft_check_percent(char *str, va_list ap, int *flag)
 
 int	ft_printf(const char *argv, ...)
 {
-    va_list	ap;
-    char	*str;
+	va_list	ap;
+	char	*str;
 	int		flag[7];
 
-    str = ft_strdup(argv);
+	str = ft_strdup(argv);
 	flag_init(flag);
 	flag[6] = 0;
-    if (str == NULL)
-    	return (0);
-    va_start(ap, argv);
-    ft_check_percent(str, ap, flag);
-    va_end(ap);
+	if (str == NULL)
+		return (0);
+	va_start(ap, argv);
+	ft_check_percent(str, ap, flag);
+	va_end(ap);
 	free(str);
 	return (flag[6]);
 }

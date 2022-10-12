@@ -10,8 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include <unistd.h>
+#include "ft_printf.h"
 
 void	ft_putchar_fd(char c, int fd, int *flag)
 {

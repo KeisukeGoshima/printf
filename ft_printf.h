@@ -15,6 +15,7 @@
 # include <stdarg.h>
 # include <stdlib.h>
 # include <limits.h>
+# include <unistd.h>
 
 int 	ft_printf(const char *argv, ...);
 char	*format_distribute(char *str, va_list ap, int *flag);

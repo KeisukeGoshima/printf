@@ -27,18 +27,14 @@ int	countdigit_base_unsigned(unsigned long long n, int base)
 
 void	setnum_unsigned(long n, int base, char *str, int digit)
 {
-	unsigned long long	div;
 	int					i;
 
-	div = 1;
-	i = 0;
-	while (i++ < digit)
-		div *= base;
-	i = 0;
-	while (i < digit)
+	i = digit - 1;
+	while (i >= 0)
 	{
-		str[i++] = convert_0x((n % div) / (div / base));
-		div /= base;
+		str[i--] = convert_0x(n % base);
+		n -= (n % base);
+		n /= base;
 	}
 }
 

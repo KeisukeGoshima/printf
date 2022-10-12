@@ -65,10 +65,7 @@ void	convert_base(int num, int option, int *flag, int base)
 	unsigned int	n;
 	int				i;
 
-	if (num < 0)
-		n = UINT_MAX + num + 1;
-	else
-		n = num;
+	n = (unsigned int)num;
 	output = convert_numtostr(n, base);
 	if (output == NULL)
 		return ;
@@ -101,17 +98,15 @@ void	convert_standard_num(int num, int option, int *flag, int base)
 	free(output);
 }
 
-void	convert_address(void *p, int *flag)
+void	convert_address(unsigned long long p, int *flag)
 {
-	unsigned long long	num;
 	char 				*str;
-	int					i;
-	unsigned long long	div;
 
-	num = (unsigned long long)p;
-	str = convert_numtostr(num, 16);
-	ft_putstr_fd("(null)", 1, flag);
-	ft_putstr_flag(&str[i], flag, 0);
+	str = convert_numtostr(p, 16);
+	if (str == NULL)
+		return ;
+	ft_putstr_fd("0x", 1, flag);
+	ft_putstr_flag(str, flag, 0);
 	free(str);
 }
 
@@ -140,7 +135,7 @@ void	format_distribute(char *str, va_list ap, int *flag)
 	else if (*str == 's')
 		ft_putstr_flag(va_arg(ap, char*), flag, 0);
 	else if (*str == 'p')
-		convert_address(va_arg(ap, void*), flag);
+		convert_address(va_arg(ap, unsigned long long), flag);
 	else if (*str == 'd' || *str == 'i')
 		convert_standard_num(va_arg(ap, int), 2, flag, 10);
 	else if (*str == 'u')
@@ -192,35 +187,34 @@ int	ft_printf(const char *argv, ...)
 	return (flag[5]);
 }
 
-// #include <stdio.h>
-// int main(void)
-// {
-// 	char *a = "a";
-// 	unsigned int i = 10;
+#include <stdio.h>
+int main(void)
+{
+	unsigned int i = 10;
 
-// 	ft_printf("%d\n", 10);
-// 	printf("%d\n", 10);
-// 	printf("----------\n");
-// 	ft_printf("%i\n", 10);
-// 	printf("%i\n", 10);
-// 	printf("----------\n");
-// 	ft_printf("%c\n", 'a');
-// 	printf("%c\n", 'a');
-// 	printf("----------\n");
-// 	ft_printf("%p\n", a);
-// 	printf("%p\n", a);
-// 	printf("----------\n");
-// 	ft_printf("%d\n", ft_printf("%s\n", "42tokyo"));
-// 	printf("%d\n", printf("%s\n", "42tokyo"));
-// 	printf("----------\n");
-// 	ft_printf("%u\n", i);
-// 	printf("%u\n", i);
-// 	printf("----------\n");
-// 	ft_printf("%x\n", 10);
-// 	printf("%x\n", 10);
-// 	printf("----------\n");
-// 	ft_printf("%X\n", 10);
-// 	printf("%X\n", 10);
-// 	printf("----------\n");
-// 	return (0);
-// }
+	ft_printf("%d\n", 10);
+	printf("%d\n", 10);
+	printf("----------\n");
+	ft_printf("%i\n", 10);
+	printf("%i\n", 10);
+	printf("----------\n");
+	ft_printf("%c\n", 'a');
+	printf("%c\n", 'a');
+	printf("----------\n");
+	ft_printf("%p\n", LONG_MIN);
+	printf("%p\n", LONG_MIN);
+	printf("----------\n");
+	ft_printf("%d\n", ft_printf("%s\n", "42tokyo"));
+	printf("%d\n", printf("%s\n", "42tokyo"));
+	printf("----------\n");
+	ft_printf("%u\n", i);
+	printf("%u\n", i);
+	printf("----------\n");
+	ft_printf("%x\n", 10);
+	printf("%x\n", 10);
+	printf("----------\n");
+	ft_printf("%X\n", 10);
+	printf("%X\n", 10);
+	printf("----------\n");
+	return (0);
+}

@@ -47,7 +47,7 @@ void	ft_putstr_flag(char *output, int *flag, int option) // -, +, num, ' ', 0
 		len++;
 	if (flag[0])
 		ft_putoutput(output, flag);
-	while (len++ < flag[2])
+	while (len++ < flag[2] && !flag[0])
 	{
 		if (flag[4])
 			ft_putchar_fd('0', 1, flag);
@@ -192,20 +192,20 @@ int main(void)
 {
 	unsigned int i = 10;
 
-	ft_printf("%d\n", 10);
-	printf("%d\n", 10);
+	ft_printf("%-3d\n", 10);
+	printf("%-3d\n", 10);
 	printf("----------\n");
-	ft_printf("%i\n", 10);
-	printf("%i\n", 10);
+	ft_printf("%5i\n", 10);
+	printf("%5i\n", 10);
 	printf("----------\n");
-	ft_printf("%c\n", 'a');
-	printf("%c\n", 'a');
+	ft_printf("%-3c\n", 'a');
+	printf("%-3c\n", 'a');
 	printf("----------\n");
-	ft_printf("%p\n", LONG_MIN);
-	printf("%p\n", LONG_MIN);
+	ft_printf("%-20p\n", LONG_MIN);
+	printf("%-20p\n", LONG_MIN);
 	printf("----------\n");
-	ft_printf("%d\n", ft_printf("%s\n", "42tokyo"));
-	printf("%d\n", printf("%s\n", "42tokyo"));
+	ft_printf("%3d\n", ft_printf("%s\n", "42tokyo"));
+	printf("%3d\n", printf("%s\n", "42tokyo"));
 	printf("----------\n");
 	ft_printf("%u\n", i);
 	printf("%u\n", i);

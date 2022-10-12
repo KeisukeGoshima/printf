@@ -20,3 +20,5 @@ re:				fclean all
 
 $(NAME):		$(OBJS)
 				ar rc $(NAME) $(OBJS)
+
+bonus:			$(NAME)

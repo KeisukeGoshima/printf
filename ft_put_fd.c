@@ -17,12 +17,12 @@ void	ft_putchar_fd(char c, int fd, int *flag)
 {
 	if (fd < 0)
 		return ;
-	flag[5] += write(fd, &c, sizeof(char));
+	flag[6] += write(fd, &c, sizeof(char));
 }
 
 void	ft_putstr_fd(char *s, int fd, int *flag)
 {
 	if (s == NULL || fd < 0)
 		return ;
-	flag[5] += write(fd, s, ft_strlen(s));
+	flag[6] += write(fd, s, ft_strlen(s));
 }

@@ -18,7 +18,7 @@ void	flag_init(int *flag)
 	int i;
 
 	i = 0;
-	while (i < 5)
+	while (i < 6)
 		flag[i++] = 0;
 }
 
@@ -26,6 +26,8 @@ void	ft_putoutput(char *output, int *flag)
 {
 	if (flag[1] == ' ' || flag[1] == '+')
 		ft_putchar_fd(flag[1], 1, flag);
+	if (flag[5] == 16)
+		ft_putstr_fd("0x", 1, flag);
 	ft_putstr_fd(output, 1, flag);
 }
 
@@ -49,13 +51,34 @@ void	ft_putstr_flag(char *output, int *flag, int option) // -, +, num, ' ', 0
 		ft_putoutput(output, flag);
 	while (len++ < flag[2])
 	{
-		if (flag[4] && !flag[1])
+		if (flag[4] && !flag[0])
 			ft_putchar_fd('0', 1, flag);
 		else
 			ft_putchar_fd(' ', 1, flag);
 	}
 	if (!flag[0])
 		ft_putoutput(output, flag);
+}
+
+void	ft_putchar_flag(int c, int *flag, int option)
+{
+	int	len;
+
+	if (c == 0)
+		len = 0;
+	else
+		len = 1;
+	if (flag[0])
+		ft_putchar_fd(c, 1, flag);
+	while (len++ < flag[2])
+	{
+		if (flag[4] && !flag[0])
+			ft_putchar_fd('0', 1, flag);
+		else
+			ft_putchar_fd(' ', 1, flag);
+	}
+	if (!flag[0])
+		ft_putchar_fd(c, 1, flag);
 }
 
 void	convert_base(int num, int option, int *flag, int base)
@@ -90,6 +113,8 @@ void	convert_standard_num(int num, int option, int *flag, int base)
 	output = ft_itoa_base(num, base);
 	if (output == NULL)
 		return ;
+	if (flag[5] == 1 && base == 16)
+		flag[5] = 16;
 	ft_putstr_flag(output, flag, option);
 	free(output);
 }
@@ -101,19 +126,8 @@ void	convert_address(unsigned long long p, int *flag)
 	str = convert_numtostr(p, 16);
 	if (str == NULL)
 		return ;
-	ft_putstr_fd("0x", 1, flag);
+	flag[5] = 16;
 	ft_putstr_flag(str, flag, 0);
-	free(str);
-}
-
-void	convert_chartostr(int c, int *flag, int option)
-{
-	char	*str;
-
-	str = malloc(sizeof(char) * 2);
-	str[0] = c;
-	str[1] = 0;
-	ft_putstr_flag(str, flag, option);
 	free(str);
 }
 
@@ -129,6 +143,8 @@ char	*flag_distribute(char *str, va_list ap, int *flag)
 		flag[3] = 1;
 	else if (*str == '0')
 		flag[4] = 1;
+	else if (*str == '#')
+		flag[5] = 1;
 	else
 	{
 		str--;
@@ -141,7 +157,7 @@ char	*flag_distribute(char *str, va_list ap, int *flag)
 char	*format_distribute(char *str, va_list ap, int *flag)
 {
 	if (*str == 'c')
-		convert_chartostr(va_arg(ap, int), flag, 0);
+		ft_putchar_flag(va_arg(ap, int), flag, 0);
 	else if (*str == 's')
 		ft_putstr_flag(va_arg(ap, char*), flag, 0);
 	else if (*str == 'p')
@@ -184,18 +200,18 @@ int	ft_printf(const char *argv, ...)
 {
     va_list	ap;
     char	*str;
-	int		flag[6]; // -, +, num, ' ', 0, count 
+	int		flag[7]; // -, +, num, ' ', 0, #, count 
 
     str = ft_strdup(argv);
 	flag_init(flag);
-	flag[5] = 0;
+	flag[6] = 0;
     if (str == NULL)
         return (0);
     va_start(ap, argv);
     ft_check_percent(str, ap, flag);
     va_end(ap);
 	free(str);
-	return (flag[5]);
+	return (flag[6]);
 }
 
 #include <stdio.h>

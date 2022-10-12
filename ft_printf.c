@@ -206,35 +206,35 @@ int	ft_printf(const char *argv, ...)
 	return (flag[5]);
 }
 
-#include <stdio.h>
-int main(void)
-{
-	char *a = "a";
-	unsigned int i = 10;
+// #include <stdio.h>
+// int main(void)
+// {
+// 	char *a = "a";
+// 	unsigned int i = 10;
 
-	ft_printf("%d\n", 10);
-	printf("%d\n", 10);
-	printf("----------\n");
-	ft_printf("%i\n", 10);
-	printf("%i\n", 10);
-	printf("----------\n");
-	ft_printf("%c\n", 'a');
-	printf("%c\n", 'a');
-	printf("----------\n");
-	ft_printf("%p\n", a);
-	printf("%p\n", a);
-	printf("----------\n");
-	ft_printf("%d\n", ft_printf("%s\n", "42tokyo"));
-	printf("%d\n", printf("%s\n", "42tokyo"));
-	printf("----------\n");
-	ft_printf("%u\n", i);
-	printf("%u\n", i);
-	printf("----------\n");
-	ft_printf("%x\n", 10);
-	printf("%x\n", 10);
-	printf("----------\n");
-	ft_printf("%X\n", 10);
-	printf("%X\n", 10);
-	printf("----------\n");
-	return (0);
-}
+// 	ft_printf("%d\n", 10);
+// 	printf("%d\n", 10);
+// 	printf("----------\n");
+// 	ft_printf("%i\n", 10);
+// 	printf("%i\n", 10);
+// 	printf("----------\n");
+// 	ft_printf("%c\n", 'a');
+// 	printf("%c\n", 'a');
+// 	printf("----------\n");
+// 	ft_printf("%p\n", a);
+// 	printf("%p\n", a);
+// 	printf("----------\n");
+// 	ft_printf("%d\n", ft_printf("%s\n", "42tokyo"));
+// 	printf("%d\n", printf("%s\n", "42tokyo"));
+// 	printf("----------\n");
+// 	ft_printf("%u\n", i);
+// 	printf("%u\n", i);
+// 	printf("----------\n");
+// 	ft_printf("%x\n", 10);
+// 	printf("%x\n", 10);
+// 	printf("----------\n");
+// 	ft_printf("%X\n", 10);
+// 	printf("%X\n", 10);
+// 	printf("----------\n");
+// 	return (0);
+// }

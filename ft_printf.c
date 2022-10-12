@@ -109,22 +109,8 @@ void	convert_address(void *p, int *flag)
 	unsigned long long	div;
 
 	num = (unsigned long long)p;
-	str = malloc(sizeof(char) * 19);
-	if (str == NULL)
-		return ;
-	str[18] = '\0';
-	i = 17;
-	div = 16;
-	while (num != 0)
-	{
-		str[i--] = convert_0x(((num % div) / (div / 16)));
-		num -= (num % div);
-		div *= 16;
-	}
-	if (i == 17)
-		str[i--] = '0';
-	str[i--] = 'x';
-	str[i] = '0';
+	str = convert_numtostr(num, 16);
+	ft_putstr_fd("(null)", 1, flag);
 	ft_putstr_flag(&str[i], flag, 0);
 	free(str);
 }

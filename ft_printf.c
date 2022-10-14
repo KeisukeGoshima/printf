@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: kgoshima <kgoshima@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 20:33:20 by marvin            #+#    #+#             */
-/*   Updated: 2022/10/10 20:33:20 by marvin           ###   ########.fr       */
+/*   Updated: 2022/10/14 13:54:28 by kgoshima         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ char	*format_distribute(char *str, va_list ap, int *flag)
 	else if (*str == 'X')
 		convert_base(va_arg(ap, int), 1, flag, 16);
 	else if (*str == '%')
-		ft_putchar_fd('%', 1, flag);
+		ft_putchar_flag('%', flag);
 	else
 		str = flag_distribute(str, ap, flag);
 	return (str);
@@ -104,34 +104,50 @@ int	ft_printf(const char *argv, ...)
 	return (flag[6]);
 }
 
-/*
-#include <stdio.h>
-int main(void)
-{
-	unsigned int i = 10;
-	ft_printf("%-3d\n", 10);
-	printf("%-3d\n", 10);
-	printf("----------\n");
-	ft_printf("%5i\n", 10);
-	printf("%5i\n", 10);
-	printf("----------\n");
-	printf("%d\n", ft_printf("%-3c\n", 0));
-	printf("%d\n", printf("%-3c\n", 0));
-	printf("----------\n");
-	ft_printf("%-20p\n", LONG_MIN);
-	//printf("%-20p\n", LONG_MIN);
-	printf("----------\n");
-	ft_printf("%3d\n", ft_printf("%s\n", "42tokyo"));
-	printf("%3d\n", printf("%s\n", "42tokyo"));
-	printf("----------\n");
-	ft_printf("%u\n", i);
-	printf("%u\n", i);
-	printf("----------\n");
-	ft_printf("%x\n", 10);
-	printf("%x\n", 10);
-	printf("----------\n");
-	ft_printf("%X\n", 10);
-	printf("%X\n", 10);
-	printf("----------\n");
-	return (0);
-}*/
+// #include <stdio.h>
+// int main(void)
+// {
+// 	char	a = 'a';
+// 	char	*b = "42tokyo";
+// 	char 	*c = "a";
+// 	int		d = 10;
+// 	ft_printf("[%c] [%s] [%p] [%d] [%i] [%u] [%x] [%X] [%%]\n",
+// 	 a, b, c, d, d, d, d, d);
+// 	printf("[%c] [%s] [%p] [%d] [%i] [%u] [%x] [%X] [%%]\n",
+// 	 a, b, c, d, d, d, d, d);
+// 	printf("----------\n");
+// 	ft_printf("[%-c] [%-s] [%-p] [%-d] [%-i] [%-u] [%-x] [%-X] [%%]\n", 
+// 	a, b, c, d, d, d, d, d);
+// 	printf("[%-c] [%-s] [%-p] [%-d] [%-i] [%-u] [%-x] [%-X] [%%]\n",
+// 	 a, b, c, d, d, d, d, d);
+// 	printf("----------\n");
+// 	ft_printf("[%-5c] [%-5s] [%-5p] [%-5d] [%-5i] [%-5u] [%-5x] [%-5X] [%5%]\n",
+// 	 a, b, c, d, d, d, d, d);
+// 	printf("[%-5c] [%-5s] [%-5p] [%-5d] [%-5i] [%-5u] [%-5x] [%-5X] [%5%]\n",
+// 	 a, b, c, d, d, d, d, d);
+// 	printf("----------\n");
+// 	ft_printf("[%-#5c] [%-#5s] [%-#5p] [%-#5d] [%-#5i] [%-#5u] [%-#5x] [%-#5X]
+//	 [%5%]\n", a, b, c, d, d, d, d, d);
+// 	printf("[%-5c] [%-5s] [%-5p] [%-5d] [%-5i] [%-5u] [%-#5x] [%-#5X] [%5%]\n", 
+// 	a, b, c, d, d, d, d, d);
+// 	printf("----------\n");
+// 	ft_printf("[%c] [%s] [%p] [%08d] [%08i] [%08u] [%08x] [%08X] [%%]\n",
+// 	 a, b, c, d, d, d, d, d);
+// 	printf("[%c] [%s] [%p] [%08d] [%08i] [%08u] [%08x] [%08X] [%%]\n",
+// 	 a, b, c, d, d, d, d, d);
+// 	printf("----------\n");
+// 	ft_printf("[%8c] [%8s] [%8p] [% 8d] [% 8i] [%8u] [%8x] [%8X] [%%]\n",
+// 	 a, b, c, d, d, d, d, d);
+// 	printf("[%8c] [%8s] [%8p] [% 8d] [% 8i] [%8u] [%8x] [%8X] [%%]\n",
+// 	 a, b, c, d, d, d, d, d);
+// 	printf("----------\n");
+// 	ft_printf("[%8c] [%8s] [%8p] [%+8d] [%+8i] [%8u] [%8x] [%8X] [%%]\n",
+// 	 a, b, c, d, d, d, d, d);
+// 	printf("[%8c] [%8s] [%8p] [%+8d] [%+8i] [%8u] [%8x] [%8X] [%%]\n",
+// 	 a, b, c, d, d, d, d, d);
+// 	printf("----------\n");
+// 	ft_printf("%X\n", 10);
+// 	printf("%X\n", 10);
+// 	printf("----------\n");
+// 	return (0);
+// }
